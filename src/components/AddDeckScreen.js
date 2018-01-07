@@ -1,13 +1,7 @@
 import React from "react";
-import {
-  Header,
-  Container,
-  Button,
-  Content,
-  Item,
-  Input,
-  Text
-} from "native-base";
+import { Container, Button, Content, Item, Input, Text } from "native-base";
+
+import { saveDeckTitle } from "../helpers/storage";
 
 export default class AddDeckScreen extends React.Component {
   state = {
@@ -30,12 +24,15 @@ export default class AddDeckScreen extends React.Component {
 
   handleSubmit = e => {
     const { title } = this.state;
-    // Create Deck
-    // Go Back to Root
-    console.log(title);
     if (title.length == 0) {
       alert("Please insert the title");
+      return;
     }
+
+    saveDeckTitle(title).then(() => {
+      this.props.navigation.goBack();
+      this.props.navigation.state.params.updateDecks();
+    });
   };
 
   render() {

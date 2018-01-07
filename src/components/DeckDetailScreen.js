@@ -1,27 +1,47 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { withNavigation } from "react-navigation";
+import { getDeck } from "../helpers/storage";
 
-export default class DeckDetail extends React.Component {
+class DeckDetail extends React.Component {
+  state = {
+    deck: {}
+  };
+
   static navigationOptions = ({ navigation }) => {
     return {
-      title: `${navigation.state.params.deck.title} Deck`
+      title: `${navigation.state.params.title} Deck`
     };
   };
 
-  handleAddCard = () => {
-    console.log("move to add card screen");
-  };
-  handleStartQuiz = () => {
-    console.log("move to start quiz screen");
+  componentDidMount() {
+    this.updateDeck();
+  }
+
+  updateDeck = () => {
+    const title = this.props.navigation.state.params.title;
+    getDeck(title).then(deck => {
+      this.setState({
+        deck
+      });
+    });
   };
 
+  handleAddCard = () => {
+    this.props.navigation.navigate("AddCardScreen", {
+      deck: this.state.deck,
+      updateDeck: this.updateDeck
+    });
+  };
+
+  handleStartQuiz = () => {};
+
   render() {
-    const { navigation } = this.props;
-    const deck = navigation.state.params.deck;
+    const { deck } = this.state;
     return (
       <View style={styles.container}>
         <Text>{deck.title}</Text>
-        <Text>{deck.questions.length} cards</Text>
+        {deck.questions && <Text>{deck.questions.length} cards</Text>}
         <TouchableOpacity onPress={this.handleAddCard}>
           <Text>Add Card</Text>
         </TouchableOpacity>
@@ -32,6 +52,8 @@ export default class DeckDetail extends React.Component {
     );
   }
 }
+
+export default withNavigation(DeckDetail);
 
 const styles = StyleSheet.create({
   container: {}

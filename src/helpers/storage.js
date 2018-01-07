@@ -1,38 +1,40 @@
-// TODO: It is a test Data, delete it
-export const data = {
-  React: {
-    title: "React",
-    questions: [
-      {
-        question: "What is React?",
-        answer: "A library for managing user interfaces"
-      },
-      {
-        question: "Where do you make Ajax requests in React?",
-        answer: "The componentDidMount lifecycle event"
-      }
-    ]
-  },
-  JavaScript: {
-    title: "JavaScript",
-    questions: [
-      {
-        question: "What is a closure?",
-        answer:
-          "The combination of a function and the lexical environment within which that function was declared."
-      }
-    ]
-  }
+import { AsyncStorage } from "react-native";
+
+const KEY = "MOBILE_FLASH_CARD_STORAGE_KEY";
+
+export const getDecks = () => {
+  return AsyncStorage.getItem(KEY).then(res => {
+    if (res === null) {
+      return {};
+    }
+    return JSON.parse(res);
+  });
 };
 
-// getDecks: return all of the decks along with their titles, questions, and answers.
-export const getDecks = () => {};
+export const getDeck = title => {
+  return getDecks().then(decks => {
+    return decks[title];
+  });
+};
 
-//saveDeckTitle: take in a single title argument and add it to the decks.
-export const getDeck = id => {};
+export const saveDeckTitle = title => {
+  const data = {
+    title: title,
+    questions: []
+  };
 
-// getDeck: take in a single id argument and return the deck associated with that id.
-export const saveDeckTitle = tite => {};
+  return AsyncStorage.mergeItem(
+    KEY,
+    JSON.stringify({
+      [title]: data
+    })
+  );
+};
 
 // addCardToDeck: take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title.
-export const baddCardToDeck = (title, card) => {};
+export const addCardToDeck = (title, card) => {
+  return getDecks().then(decks => {
+    decks[title].questions.push(card);
+    AsyncStorage.setItem(KEY, JSON.stringify(decks));
+  });
+};
