@@ -25,7 +25,8 @@ export default class DeckListScreen extends React.Component {
   }
 
   handleAddDeck = () => {
-    console.log("Move to add detail");
+    const { navigation } = this.props;
+    navigation.navigate("AddDeckScreen");
   };
 
   render() {

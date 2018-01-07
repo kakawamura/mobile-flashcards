@@ -5,6 +5,7 @@ import { StackNavigator } from "react-navigation";
 
 import DeckListScreen from "./src/components/DeckListScreen";
 import DeckDetailScreen from "./src/components/DeckDetailScreen";
+import AddDeckScreen from "./src/components/AddDeckScreen";
 
 const Stack = StackNavigator({
   DeckListScreen: {
@@ -12,6 +13,9 @@ const Stack = StackNavigator({
   },
   DeckDetailScreen: {
     screen: DeckDetailScreen
+  },
+  AddDeckScreen: {
+    screen: AddDeckScreen
   }
 });
 
