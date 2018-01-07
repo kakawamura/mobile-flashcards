@@ -9,7 +9,7 @@ export default class DeckList extends React.Component {
     return (
       <View style={styles.container}>
         <FlatList
-          style={{ height: "100%" }}
+          style={{ height: "100%", padding: 12 }}
           data={Object.values(data)}
           renderItem={({ item }) => <DeckItem deck={item} />}
         />

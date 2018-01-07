@@ -1,5 +1,13 @@
 import React from "react";
-import { Container, Button, Content, Item, Input, Text } from "native-base";
+import {
+  Container,
+  Button,
+  Label,
+  Content,
+  Item,
+  Input,
+  Text
+} from "native-base";
 
 import { saveDeckTitle } from "../helpers/storage";
 
@@ -37,12 +45,17 @@ export default class AddDeckScreen extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container style={{ padding: 12 }}>
         <Content>
           <Item>
             <Input onChangeText={this.handleChange} placeholder="Deck title" />
           </Item>
-          <Button onPress={this.handleSubmit} primary blocked>
+          <Button
+            style={{ marginTop: 12 }}
+            onPress={this.handleSubmit}
+            primary
+            block
+          >
             <Text>Create Deck</Text>
           </Button>
         </Content>

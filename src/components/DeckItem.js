@@ -15,7 +15,9 @@ class DeckItem extends React.Component {
       <Card>
         <CardItem button onPress={this.handleOnPress}>
           <Body>
-            <Text>{deck.title}</Text>
+            <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+              {deck.title}
+            </Text>
             <Text note>{deck.questions.length} cards</Text>
           </Body>
         </CardItem>

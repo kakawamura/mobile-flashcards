@@ -1,9 +1,10 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
+import { Button, Text } from "native-base";
 import { withNavigation } from "react-navigation";
 import { getDeck } from "../helpers/storage";
 
-class DeckDetail extends React.Component {
+class DeckDetailScreen extends React.Component {
   state = {
     deck: {}
   };
@@ -36,6 +37,10 @@ class DeckDetail extends React.Component {
 
   handleStartQuiz = () => {
     const { deck } = this.state;
+    if (deck.questions.length == 0) {
+      alert("Please add cards to your deck");
+      return;
+    }
     this.props.navigation.navigate("QuizScreen", {
       questions: deck.questions,
       index: 0,
@@ -46,22 +51,23 @@ class DeckDetail extends React.Component {
   render() {
     const { deck } = this.state;
     return (
-      <View style={styles.container}>
-        <Text>{deck.title}</Text>
+      <View style={{ padding: 12, textAlign: "center" }}>
+        <Text style={{ fontWeight: "bold", fontSize: 24 }}>{deck.title}</Text>
         {deck.questions && <Text>{deck.questions.length} cards</Text>}
-        <TouchableOpacity onPress={this.handleAddCard}>
+        <Button block style={{ marginTop: 12 }} onPress={this.handleAddCard}>
           <Text>Add Card</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.handleStartQuiz}>
+        </Button>
+        <Button
+          block
+          warning
+          style={{ marginTop: 12 }}
+          onPress={this.handleStartQuiz}
+        >
           <Text>Start Quiz</Text>
-        </TouchableOpacity>
+        </Button>
       </View>
     );
   }
 }
 
-export default withNavigation(DeckDetail);
-
-const styles = StyleSheet.create({
-  container: {}
-});
+export default withNavigation(DeckDetailScreen);

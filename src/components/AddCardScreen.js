@@ -42,7 +42,7 @@ export default class AddCardScreen extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container style={{ padding: 12 }}>
         <Content>
           <Item>
             <Input
@@ -56,7 +56,12 @@ export default class AddCardScreen extends React.Component {
               placeholder="Answer"
             />
           </Item>
-          <Button onPress={this.handleSubmit} primary blocked>
+          <Button
+            style={{ marginTop: 12 }}
+            onPress={this.handleSubmit}
+            primary
+            block
+          >
             <Text>Create Card</Text>
           </Button>
         </Content>
