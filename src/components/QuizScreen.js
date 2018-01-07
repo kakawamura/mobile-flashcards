@@ -99,6 +99,11 @@ export default class QuizScreen extends React.Component {
     }
     return (
       <Container style={{ padding: 12 }}>
+        <View>
+          <Text>
+            {index + 1} / {questions.length}
+          </Text>
+        </View>
         {this.state.answer ? (
           <View>
             <Text style={{ color: "#888" }}>Answer:</Text>
