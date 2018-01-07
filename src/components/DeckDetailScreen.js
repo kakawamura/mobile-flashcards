@@ -34,7 +34,14 @@ class DeckDetail extends React.Component {
     });
   };
 
-  handleStartQuiz = () => {};
+  handleStartQuiz = () => {
+    const { deck } = this.state;
+    this.props.navigation.navigate("QuizScreen", {
+      questions: deck.questions,
+      index: 0,
+      corrects: 0
+    });
+  };
 
   render() {
     const { deck } = this.state;

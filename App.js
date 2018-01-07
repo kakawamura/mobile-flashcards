@@ -7,6 +7,7 @@ import DeckListScreen from "./src/components/DeckListScreen";
 import DeckDetailScreen from "./src/components/DeckDetailScreen";
 import AddDeckScreen from "./src/components/AddDeckScreen";
 import AddCardScreen from "./src/components/AddCardScreen";
+import QuizScreen from "./src/components/QuizScreen";
 
 const Stack = StackNavigator({
   DeckListScreen: {
@@ -20,6 +21,9 @@ const Stack = StackNavigator({
   },
   AddCardScreen: {
     screen: AddCardScreen
+  },
+  QuizScreen: {
+    screen: QuizScreen
   }
 });
 
