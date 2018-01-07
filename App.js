@@ -4,6 +4,7 @@ import { Container, Content } from "native-base";
 import { Constants } from "expo";
 import { StackNavigator } from "react-navigation";
 
+import { setLocalNotification } from "./src/helpers/notifications";
 import DeckListScreen from "./src/components/DeckListScreen";
 import DeckDetailScreen from "./src/components/DeckDetailScreen";
 import AddDeckScreen from "./src/components/AddDeckScreen";
@@ -33,6 +34,9 @@ const Stack = StackNavigator({
 });
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
   render() {
     return (
       <View style={styles.container}>

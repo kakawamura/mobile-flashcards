@@ -3,6 +3,10 @@ import { View, TouchableOpacity } from "react-native";
 import { Button, Text } from "native-base";
 import { withNavigation } from "react-navigation";
 import { getDeck } from "../helpers/storage";
+import {
+  setLocalNotification,
+  clearLocalNotification
+} from "../helpers/notifications";
 
 class DeckDetailScreen extends React.Component {
   state = {
@@ -41,6 +45,9 @@ class DeckDetailScreen extends React.Component {
       alert("Please add cards to your deck");
       return;
     }
+
+    clearLocalNotification().then(setLocalNotification);
+
     this.props.navigation.navigate("QuizScreen", {
       questions: deck.questions,
       index: 0,
@@ -51,7 +58,7 @@ class DeckDetailScreen extends React.Component {
   render() {
     const { deck } = this.state;
     return (
-      <View style={{ padding: 12, textAlign: "center" }}>
+      <View style={{ padding: 12 }}>
         <Text style={{ fontWeight: "bold", fontSize: 24 }}>{deck.title}</Text>
         {deck.questions && <Text>{deck.questions.length} cards</Text>}
         <Button block style={{ marginTop: 12 }} onPress={this.handleAddCard}>
