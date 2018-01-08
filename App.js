@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, StatusBar } from "react-native";
 import { Container, Content } from "native-base";
-import { Constants } from "expo";
+import { AppLoading, Constants } from "expo";
 import { StackNavigator } from "react-navigation";
 
 import { setLocalNotification } from "./src/helpers/notifications";
@@ -34,6 +34,9 @@ const Stack = StackNavigator({
 });
 
 export default class App extends React.Component {
+  state = {
+    isReading: false
+  };
   componentWillMount() {
     this.loadFonts();
   }
@@ -52,6 +55,9 @@ export default class App extends React.Component {
   }
 
   render() {
+    if (!this.state.isReady) {
+      return <AppLoading />;
+    }
     return (
       <View style={styles.container}>
         <StatusBar translucent />
